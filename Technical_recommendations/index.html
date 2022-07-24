@@ -93,7 +93,7 @@
     <div class="Page__header">
         <h1><a href="../Technical_recommendations/index.html">Technical recommendations</a></h1>
                 <span class="ModifiedDate">
-            July 7, 2022 at 12:11 PM        </span>
+            July 24, 2022 at 9:01 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/RSS-Bridge/rss-bridge/tree/master/docs/09_Technical_recommendations/index.md" target="_blank">
                 Edit on GitHub            </a>
@@ -118,7 +118,7 @@ class TestBridge extends BridgeAbstract {
 	const CACHE_TIMEOUT = 3600;
 
 	public function collectData(){
-		$html = getSimpleHTMLDOM('https://github.com/rss-bridge/rss-bridge')
+		$html = $this-&gt;contentsFetcher-&gt;getSimpleHTMLDOM('https://github.com/rss-bridge/rss-bridge')
 			or returnServerError('No contents received!');
 	}
 }
