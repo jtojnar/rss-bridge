@@ -93,7 +93,7 @@
     <div class="Page__header">
         <h1><a href="../Helper_functions/index.html">Helper functions</a></h1>
                 <span class="ModifiedDate">
-            July 24, 2022 at 9:01 AM        </span>
+            July 24, 2022 at 10:01 AM        </span>
                         <span class="EditOn">
             <a href="https://github.com/RSS-Bridge/rss-bridge/tree/master/docs/06_Helper_functions/index.md" target="_blank">
                 Edit on GitHub            </a>
@@ -101,17 +101,13 @@
             </div>
 
     <div class="s-content">
-        <h1><a id="bridgeabstract" href="#bridgeabstract" class="Permalink" aria-hidden="true" title="Permalink">#</a>BridgeAbstract</h1>
-<p>These helpers are available inside all child classes of <code>BridgeAbstract</code> (i.e. bridges). You can access them on <code>$this</code>.</p>
-<h2><a id="getinput" href="#getinput" class="Permalink" aria-hidden="true" title="Permalink">#</a>getInput</h2>
-<p>The <code>BridgeAbstract::getInput</code> method is used to receive a value for a parameter, specified in <code>const PARAMETERS</code></p>
+        <h1><a id="getinput" href="#getinput" class="Permalink" aria-hidden="true" title="Permalink">#</a>getInput</h1>
+<p>The <code>getInput</code> function is used to receive a value for a parameter, specified in <code>const PARAMETERS</code></p>
 <pre><code class="language-PHP">$this-&gt;getInput('your input name here');
 </code></pre>
 <p><code>getInput</code> will either return the value for your parameter or <code>null</code> if the parameter is unknown or not specified.</p>
-<h1><a id="contentsfetcher" href="#contentsfetcher" class="Permalink" aria-hidden="true" title="Permalink">#</a>ContentsFetcher</h1>
-<p>These helpers are part of a <code>ContentsFetcher</code> instance. All child classes inheriting from <code>BridgeAbstract</code> (i.e. bridges) have <code>ContentsFetcher</code> available as <code>$this-&gt;contentsFetcher</code> property.</p>
-<h2><a id="getcontents" href="#getcontents" class="Permalink" aria-hidden="true" title="Permalink">#</a>getContents</h2>
-<p>The <code>ContentsFetcher::getContents</code> method uses <a href="https://secure.php.net/manual/en/book.curl.php" class="Link--external" rel="noopener noreferrer">cURL</a> to acquire data from the specified URI while respecting the various settings defined at a global level by RSS-Bridge (i.e., proxy host, user agent, etc.). This method accepts a few parameters:</p>
+<h1><a id="getcontents" href="#getcontents" class="Permalink" aria-hidden="true" title="Permalink">#</a>getContents</h1>
+<p>The <code>getContents</code> function uses <a href="https://secure.php.net/manual/en/book.curl.php" class="Link--external" rel="noopener noreferrer">cURL</a> to acquire data from the specified URI while respecting the various settings defined at a global level by RSS-Bridge (i.e., proxy host, user agent, etc.). This function accepts a few parameters:</p>
 <table>
 <thead>
 <tr>
@@ -144,36 +140,34 @@
 </table>
 <pre><code class="language-PHP">$header = array('Content-type:text/plain', 'Content-length: 100');
 $opts = array(CURLOPT_POST =&gt; 1);
-$html = $this-&gt;contentsFetcher-&gt;getContents($url, $header, $opts);
+$html = getContents($url, $header, $opts);
 </code></pre>
-<h2><a id="getsimplehtmldom" href="#getsimplehtmldom" class="Permalink" aria-hidden="true" title="Permalink">#</a>getSimpleHTMLDOM</h2>
-<p>The <code>ContentsFetcher::getSimpleHTMLDOM</code> method of is a wrapper for the <a href="http://simplehtmldom.sourceforge.net/" class="Link--external" rel="noopener noreferrer">simple_html_dom</a> <a href="http://simplehtmldom.sourceforge.net/manual_api.htm#api" class="Link--external" rel="noopener noreferrer">file_get_html</a> function in order to provide context by design.</p>
-<pre><code class="language-PHP">$html = $this-&gt;contentsFetcher-&gt;getSimpleHTMLDOM('your URI');
+<h1><a id="getsimplehtmldom" href="#getsimplehtmldom" class="Permalink" aria-hidden="true" title="Permalink">#</a>getSimpleHTMLDOM</h1>
+<p>The <code>getSimpleHTMLDOM</code> function is a wrapper for the <a href="http://simplehtmldom.sourceforge.net/" class="Link--external" rel="noopener noreferrer">simple_html_dom</a> <a href="http://simplehtmldom.sourceforge.net/manual_api.htm#api" class="Link--external" rel="noopener noreferrer">file_get_html</a> function in order to provide context by design.</p>
+<pre><code class="language-PHP">$html = getSimpleHTMLDOM('your URI');
 </code></pre>
-<h2><a id="getsimplehtmldomcached" href="#getsimplehtmldomcached" class="Permalink" aria-hidden="true" title="Permalink">#</a>getSimpleHTMLDOMCached</h2>
-<p>The <code>ContentsFetcher::getSimpleHTMLDOMCached</code> method of does the same as the <a href="#getsimplehtmldom"><code>getSimpleHTMLDOM</code></a> method, except that the content received for the given URI is stored in a cache and loaded from cache on the next request if the specified cache duration was not reached. Use this method for data that is very unlikely to change between consecutive requests to <strong>RSS-Bridge</strong>. This method allows to specify the cache duration with the second parameter (default is 24 hours / 86400 seconds).</p>
-<pre><code class="language-PHP">$html = $this-&gt;contentsFetcher-&gt;getSimpleHTMLDOMCached('your URI', 86400); // Duration 24h
+<h1><a id="getsimplehtmldomcached" href="#getsimplehtmldomcached" class="Permalink" aria-hidden="true" title="Permalink">#</a>getSimpleHTMLDOMCached</h1>
+<p>The <code>getSimpleHTMLDOMCached</code> function does the same as the <a href="#getsimplehtmldom"><code>getSimpleHTMLDOM</code></a> function, except that the content received for the given URI is stored in a cache and loaded from cache on the next request if the specified cache duration was not reached. Use this function for data that is very unlikely to change between consecutive requests to <strong>RSS-Bridge</strong>. This function allows to specify the cache duration with the second parameter (default is 24 hours / 86400 seconds).</p>
+<pre><code class="language-PHP">$html = getSimpleHTMLDOMCached('your URI', 86400); // Duration 24h
 </code></pre>
 <p><strong>Notice:</strong> Due to the current implementation a value greater than 86400 seconds (24 hours) will not work as the cache is purged every 24 hours automatically.</p>
-<h1><a id="global-functions" href="#global-functions" class="Permalink" aria-hidden="true" title="Permalink">#</a>Global functions</h1>
-<p>These functions can be used anywhere.</p>
-<h2><a id="returnerror" href="#returnerror" class="Permalink" aria-hidden="true" title="Permalink">#</a>returnError</h2>
+<h1><a id="returnerror" href="#returnerror" class="Permalink" aria-hidden="true" title="Permalink">#</a>returnError</h1>
 <p><strong>Notice:</strong> Whenever possible make use of <a href="#returnclienterror"><code>returnClientError</code></a> or <a href="#returnservererror"><code>returnServerError</code></a></p>
 <p>The <code>returnError</code> function aborts execution of the current bridge and returns the given error message with the provided error number:</p>
 <pre><code class="language-PHP">returnError('Your error message', 404);
 </code></pre>
 <p>Check the <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes" class="Link--external" rel="noopener noreferrer">list of error codes</a> for applicable error numbers.</p>
-<h2><a id="returnclienterror" href="#returnclienterror" class="Permalink" aria-hidden="true" title="Permalink">#</a>returnClientError</h2>
+<h1><a id="returnclienterror" href="#returnclienterror" class="Permalink" aria-hidden="true" title="Permalink">#</a>returnClientError</h1>
 <p>The <code>returnClientError</code> function aborts execution of the current bridge and returns the given error message with error code <strong>400</strong>:</p>
 <pre><code class="language-PHP">returnClientError('Your error message')
 </code></pre>
 <p>Use this function when the user provided invalid parameter or a required parameter is missing.</p>
-<h2><a id="returnservererror" href="#returnservererror" class="Permalink" aria-hidden="true" title="Permalink">#</a>returnServerError</h2>
+<h1><a id="returnservererror" href="#returnservererror" class="Permalink" aria-hidden="true" title="Permalink">#</a>returnServerError</h1>
 <p>The <code>returnServerError</code> function aborts execution of the current bridge and returns the given error message with error code <strong>500</strong>:</p>
 <pre><code class="language-PHP">returnServerError('Your error message')
 </code></pre>
 <p>Use this function when a problem occurs that has nothing to do with the parameters provided by the user. (like: Host service gone missing, empty data received, etc…)</p>
-<h2><a id="defaultlinkto" href="#defaultlinkto" class="Permalink" aria-hidden="true" title="Permalink">#</a>defaultLinkTo</h2>
+<h1><a id="defaultlinkto" href="#defaultlinkto" class="Permalink" aria-hidden="true" title="Permalink">#</a>defaultLinkTo</h1>
 <p>Automatically replaces any relative URL in a given string or DOM object (i.e. the one returned by <a href="#getsimplehtmldom">getSimpleHTMLDOM</a>) with an absolute URL.</p>
 <pre><code class="hljs php">defaultLinkTo ( mixed $content, string $server ) : object
 </code></pre>
@@ -191,12 +185,12 @@ $html = defaultLinkTo($html, <span class="hljs-keyword">$this</span>-&gt;getURI(
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">// &lt;img src="https://www.github.com/rss-bridge/rss-bridge/blob/master/README.md"&gt;</span>
 </code></pre>
-<h2><a id="backgroundtoimg" href="#backgroundtoimg" class="Permalink" aria-hidden="true" title="Permalink">#</a>backgroundToImg</h2>
+<h1><a id="backgroundtoimg" href="#backgroundtoimg" class="Permalink" aria-hidden="true" title="Permalink">#</a>backgroundToImg</h1>
 <p>Replaces tags with styles of <code>backgroud-image</code> by <code>&lt;img /&gt;</code> tags.</p>
 <pre><code class="hljs php">backgroundToImg(mixed $htmlContent) : object
 </code></pre>
 <p>Returns a DOM object (even if provided a string).</p>
-<h2><a id="extractfromdelimiters" href="#extractfromdelimiters" class="Permalink" aria-hidden="true" title="Permalink">#</a>extractFromDelimiters</h2>
+<h1><a id="extractfromdelimiters" href="#extractfromdelimiters" class="Permalink" aria-hidden="true" title="Permalink">#</a>extractFromDelimiters</h1>
 <p>Extract the first part of a string matching the specified start and end delimiters.</p>
 <pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extractFromDelimiters</span><span class="hljs-params">(string $string, string $start, string $end)</span> : <span class="hljs-title">mixed</span>
 </span></code></pre>
@@ -210,7 +204,7 @@ $extracted = extractFromDelimiters($string, $start, $end);
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">// 'John Doe'</span>
 </code></pre>
-<h2><a id="stripwithdelimiters" href="#stripwithdelimiters" class="Permalink" aria-hidden="true" title="Permalink">#</a>stripWithDelimiters</h2>
+<h1><a id="stripwithdelimiters" href="#stripwithdelimiters" class="Permalink" aria-hidden="true" title="Permalink">#</a>stripWithDelimiters</h1>
 <p>Remove one or more part(s) of a string using a start and end delmiters.
 It is the inverse of <code>extractFromDelimiters</code>.</p>
 <pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stripWithDelimiters</span><span class="hljs-params">(string $string, string $start, string $end)</span> : <span class="hljs-title">string</span>
@@ -225,7 +219,7 @@ $cleaned = stripWithDelimiters($string, $start, $end);
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">// 'foobar'</span>
 </code></pre>
-<h2><a id="striprecursivehtmlsection" href="#striprecursivehtmlsection" class="Permalink" aria-hidden="true" title="Permalink">#</a>stripRecursiveHTMLSection</h2>
+<h1><a id="striprecursivehtmlsection" href="#striprecursivehtmlsection" class="Permalink" aria-hidden="true" title="Permalink">#</a>stripRecursiveHTMLSection</h1>
 <p>Remove HTML sections containing one or more sections using the same HTML tag.</p>
 <pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stripRecursiveHTMLSection</span><span class="hljs-params">(string $string, string $tag_name, string $tag_start)</span> : <span class="hljs-title">string</span>
 </span></code></pre>
@@ -238,7 +232,7 @@ $cleaned = stripRecursiveHTMLSection($string, $tag_name, $tag_start);
 <span class="hljs-comment">// Output</span>
 <span class="hljs-comment">// 'foobar'</span>
 </code></pre>
-<h2><a id="markdowntohtml" href="#markdowntohtml" class="Permalink" aria-hidden="true" title="Permalink">#</a>markdownToHtml</h2>
+<h1><a id="markdowntohtml" href="#markdowntohtml" class="Permalink" aria-hidden="true" title="Permalink">#</a>markdownToHtml</h1>
 <p>Converts markdown input to HTML using <a href="https://parsedown.org/" class="Link--external" rel="noopener noreferrer">Parsedown</a>.</p>
 <pre><code class="hljs php"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">markdownToHtml</span><span class="hljs-params">(string $string)</span> : <span class="hljs-title">string</span>
 </span></code></pre>
